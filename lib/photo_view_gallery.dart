@@ -114,7 +114,6 @@ class PhotoViewGallery extends StatefulWidget {
     this.scrollPhysics,
     this.scrollDirection = Axis.horizontal,
     this.customSize,
-    this.doubleTapDisabled
   })  : itemCount = null,
         builder = null,
         assert(pageOptions != null),
@@ -139,7 +138,6 @@ class PhotoViewGallery extends StatefulWidget {
     this.scrollPhysics,
     this.scrollDirection = Axis.horizontal,
     this.customSize,
-    this.doubleTapDisabled,
   })  : pageOptions = null,
         assert(itemCount != null),
         assert(builder != null),
@@ -189,9 +187,6 @@ class PhotoViewGallery extends StatefulWidget {
 
   /// The axis along which the [PageView] scrolls. Mirror to [PageView.scrollDirection]
   final Axis scrollDirection;
-
-  /// disabled double tap zoom
-  final bool doubleTapDisabled;
 
   bool get _isBuilder => builder != null;
 
@@ -270,7 +265,7 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
             tightMode: pageOption.tightMode,
             filterQuality: pageOption.filterQuality,
             basePosition: pageOption.basePosition,
-            doubleTapDisabled: widget.doubleTapDisabled,
+            disableGestures: pageOption.disableGestures,
           )
         : PhotoView(
             key: ObjectKey(index),
@@ -295,7 +290,7 @@ class _PhotoViewGalleryState extends State<PhotoViewGallery> {
             tightMode: pageOption.tightMode,
             filterQuality: pageOption.filterQuality,
             basePosition: pageOption.basePosition,
-            doubleTapDisabled: widget.doubleTapDisabled,
+            disableGestures: pageOption.disableGestures,
           );
 
     return ClipRect(
@@ -333,6 +328,7 @@ class PhotoViewGalleryPageOptions {
     this.gestureDetectorBehavior,
     this.tightMode,
     this.filterQuality,
+    this.disableGestures,
   })  : child = null,
         childSize = null,
         assert(imageProvider != null);
@@ -353,6 +349,7 @@ class PhotoViewGalleryPageOptions {
     this.gestureDetectorBehavior,
     this.tightMode,
     this.filterQuality,
+    this.disableGestures,
   })  : imageProvider = null,
         assert(child != null);
 
@@ -400,6 +397,9 @@ class PhotoViewGalleryPageOptions {
 
   /// Mirror to [PhotoView.tightMode]
   final bool tightMode;
+
+  /// Mirror to [PhotoView.disableGestures]
+  final bool disableGestures;
 
   /// Quality levels for image filters.
   final FilterQuality filterQuality;
